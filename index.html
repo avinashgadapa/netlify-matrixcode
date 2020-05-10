@@ -1,0 +1,40 @@
+<html>
+
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Matrix Code : Matrix Digital Rain</title>
+  <style>
+    body {
+      margin: 0;
+      overflow: hidden;
+    }
+  </style>
+</head>
+
+<body>
+  <canvas id="matrix"></canvas>
+    <script>
+      const s = window.screen;
+	  
+      const w = (matrix.width = s.width);
+      const h = (matrix.height = s.height);
+	  
+      const ctx = matrix.getContext("2d");
+      const yPosArr = Array(Math.floor(w / 10) + 1).fill(0);
+      const characters = "abcdefghijklmnopqrstuvwxyz0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
+	  
+      const random = (characters) => characters[Math.floor(Math.random() * characters.length)];
+	  
+      setInterval(() => {
+        ctx.fillStyle = "rgba(0,0,0,.05)";
+        ctx.fillRect(0, 0, w, h);
+        ctx.fillStyle = "#0f0";
+        yPosArr.map((yPos, idx) => {
+          ctx.fillText(random(characters), idx * 10, yPos);
+          yPosArr[idx] = yPos >= h || yPos > 50 + 10000 * Math.random() ? 0 : yPos + 10;
+        });
+      }, 1000/30 );
+    </script>
+</body>
+
+</html>
